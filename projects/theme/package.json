@@ -1,11 +1,31 @@
 {
-  "name": "theme",
-  "version": "0.0.1",
+  "name": "@future-cube/theme",
+  "version": "0.0.3",
   "peerDependencies": {
     "@angular/common": "^14.2.0",
     "@angular/core": "^14.2.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  }
+  },
+  "description": "This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.0.",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xingkoo/ng-future-cube-lib.git"
+  },
+  "keywords": [
+    "angular",
+    "library",
+    "ng-alain"
+  ],
+  "author": "xingkoo@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xingkoo/ng-future-cube-lib/issues"
+  },
+  "homepage": "https://github.com/xingkoo/ng-future-cube-lib#readme"
 }
