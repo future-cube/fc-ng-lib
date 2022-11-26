@@ -1,5 +1,5 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 // #region import
 import { Nl2brPipe } from './pipes';
@@ -15,8 +15,9 @@ const HELPERS = [AppHelperService, STHelperService];
 // #endregion
 
 @NgModule({
-  declarations: PIPES,
   imports: [CommonModule],
+  declarations: PIPES,
+  exports: [...PIPES]
 })
 export class FcThemeModule {
   static forRoot(): ModuleWithProviders<FcThemeModule> {

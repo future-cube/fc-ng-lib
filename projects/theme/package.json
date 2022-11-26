@@ -3,7 +3,12 @@
   "version": "0.0.3",
   "peerDependencies": {
     "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0"
+    "@angular/core": "^14.2.0",
+    "@delon/abc": "^14.2.0",
+    "@delon/cache": "^14.2.0",
+    "@delon/theme": "^14.2.0",
+    "ng-zorro-antd": "^14.2.0"
+
   },
   "dependencies": {
     "tslib": "^2.3.0"

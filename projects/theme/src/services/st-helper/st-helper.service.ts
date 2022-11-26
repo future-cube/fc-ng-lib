@@ -48,15 +48,15 @@ export class STHelperService {
         });
         return;
       }
-      this.columns[key].subscribe((columns: STColumn[]) => {
-        columns.map((column: STColumn, index: number) => {
+      this.columns[key].subscribe((res: STColumn[]) => {
+        res.map((column: STColumn, index: number) => {
           const k: string = column.index!.toString();
           if (extend.hasOwnProperty(k)) {
             Object.assign(column, extend[k]);
           }
           return column;
         });
-        observer.next(columns);
+        observer.next(res);
         observer.complete();
       });
     });

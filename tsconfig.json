@@ -8,12 +8,7 @@
     "strict": true,
     "noImplicitOverride": true,
     "paths": {
-      "future-cube": [
-        "dist/future-cube"
-      ],
-      "theme": [
-        "dist/theme"
-      ]
+      "@future-cube/*": ["./projects/*"],
     },
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 // import { EventsService, SFHelperService, STHelperService } from '@core';
 import { CacheService } from '@delon/cache';
 import { DrawerHelper, MenuService, ModalHelper, TitleService, _HttpClient } from '@delon/theme';
+// @todo 此组件未使用，所以暂时没有设置在依赖中。
 import { ArrayService, ScrollService } from '@delon/util';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
