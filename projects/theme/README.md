@@ -9,7 +9,7 @@ Run `ng generate component component-name --project theme` to generate a new com
 
 ## Developt
 
-Run `ng serve --library-tester`.
+Run `ng serve --demo`.
 
 ## Build
 
