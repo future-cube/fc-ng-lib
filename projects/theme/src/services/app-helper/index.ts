@@ -1,1 +1,1 @@
-export { AppHelperService } from './app-helper.service';
+export * from './app-helper.service';

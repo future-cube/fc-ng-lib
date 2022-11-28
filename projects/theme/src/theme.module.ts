@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
-// #region import
 import { Nl2brPipe } from './pipes';
+import { AppHelperService } from './services/app-helper';
+import { STHelperService } from './services/st-helper';
 
+// #region import
 const PIPES = [Nl2brPipe];
 // #endregion
 
 // #region import
-import { AppHelperService } from './services/app-helper';
-import { STHelperService } from './services/st-helper';
-
 const HELPERS = [AppHelperService, STHelperService];
 // #endregion
 
@@ -23,14 +22,14 @@ export class FcThemeModule {
   static forRoot(): ModuleWithProviders<FcThemeModule> {
     return {
       ngModule: FcThemeModule,
-      providers: HELPERS,
+      providers: HELPERS
     };
   }
 
   static forChild(): ModuleWithProviders<FcThemeModule> {
     return {
       ngModule: FcThemeModule,
-      providers: HELPERS,
+      providers: HELPERS
     };
   }
 }

@@ -1,22 +1,31 @@
-import { Inject, Injectable, Injector, Optional } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Injector, Optional } from '@angular/core';
 import { STColumn, STComponent, STData } from '@delon/abc/st';
 import { CacheService } from '@delon/cache';
 import { _HttpClient } from '@delon/theme';
 import { map, Observable, Observer, Subject, Subscription } from 'rxjs';
-import { SCHEMA_API } from './st-helper.types';
+
+import { FcConfigService } from '../config';
 
 const ServiceName = 'ST Helper Service';
 
+export interface FcStOptions {
+  url: string;
+}
+
+export const FC_ST_OPTIONS = new InjectionToken<FcStOptions>('fc-st-options');
+
 @Injectable({ providedIn: 'root' })
 export class STHelperService {
-  // 请求列配置参数的接口地址
-  url: string = 'system/sf-schema/schema';
+  // 请求列配置参数的接口地址(应该让调用的时候再配置，如果未配置，则提示用户配置)
+  options: FcStOptions = {
+    url: 'system/sf-schema/schema'
+  };
+
   private columns: { [propName: string]: any } = {}; // 存储指定键值，避免重复从后端请求
-  constructor(
-    private injector: Injector,
-    @Optional() @Inject(SCHEMA_API) schema_url?: string
-  ) {
-    if (schema_url) this.url = schema_url;
+  constructor(private injector: Injector, public fcs: FcConfigService) {
+    console.log(fcs.get('st'));
+    this.options = { ...this.options, ...fcs.get('st') };
+    console.log(this.options);
   }
 
   // http
@@ -28,22 +37,22 @@ export class STHelperService {
     return this.injector.get(CacheService);
   }
 
-  public getColumns(
-    key: string,
-    extend?: { [key: string]: STColumn }
-  ): Observable<any> {
+  public getColumns(key: string, extend?: { [key: string]: STColumn }): Observable<any> {
     // 必需提供键名
     if (!key) {
       throw new Error(`[${ServiceName}] => 必需表明需要获取的表格配置键名.`);
     }
     // 缓存下来
     if (this.columns[key] === undefined) {
-      this.columns[key] = this.http.get(this.url, { key });
+      console.log(this.options);
+      this.columns[key] = this.http.get(this.options.url, { key });
+      console.log(this.columns[key]);
     }
-    return new Observable<any>((observer) => {
+    return new Observable<any>(observer => {
       if (extend === undefined) {
-        this.columns[key].subscribe((columns: STColumn[]) => {
-          observer.next(columns);
+        this.columns[key].subscribe((res: STColumn[]) => {
+          console.log(res);
+          observer.next(res);
           observer.complete();
         });
         return;

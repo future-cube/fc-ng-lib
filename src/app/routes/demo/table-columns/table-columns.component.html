@@ -1,0 +1,20 @@
+<page-header title="表格服务演示" [content]="contentTpl">
+  <ng-template #contentTpl>
+    <div>从后台获取表格结构配置及显示数据。</div>
+    <div>可以预置部分无法后台配置的项目，如format,追加到返回的数据中。</div>
+  </ng-template>
+</page-header>
+
+<st
+  #st
+  [data]="url"
+  [columns]="columns"
+  [scroll]="{ x: '800px' }"
+  [widthMode]="{ type: 'strict' }"
+  resizable
+  [res]="{ reName: { list: 'items' } }"
+  [req]="{ lazyLoad: true }"
+  [ps]="100"
+  size="default"
+>
+</st>
