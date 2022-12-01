@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { STComponent } from '@delon/abc/st';
-import { _HttpClient } from '@delon/theme';
 import { AppHelperService } from '@future-cube/theme';
 
 @Component({
