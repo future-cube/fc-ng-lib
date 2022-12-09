@@ -34,14 +34,12 @@ const HEADERCOMPONENTS = [
   HeaderFullScreenComponent,
   HeaderI18nComponent,
   HeaderClearStorageComponent,
-  HeaderUserComponent,
+  HeaderUserComponent
 ];
 
 // passport
 import { LayoutPassportComponent } from './passport/passport.component';
-const PASSPORT = [
-  LayoutPassportComponent
-];
+const PASSPORT = [LayoutPassportComponent];
 
 @NgModule({
   imports: [
@@ -62,9 +60,9 @@ const PASSPORT = [
     NzSpinModule,
     NzBadgeModule,
     NzAvatarModule,
-    NzIconModule,
+    NzIconModule
   ],
   declarations: [...COMPONENTS, ...HEADERCOMPONENTS, ...PASSPORT],
-  exports: [...COMPONENTS, ...PASSPORT],
+  exports: [...COMPONENTS, ...PASSPORT]
 })
-export class LayoutModule { }
+export class LayoutModule {}

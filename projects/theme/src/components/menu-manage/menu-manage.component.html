@@ -1,0 +1,77 @@
+<nz-empty nzNotFoundContent="未获取到数据" *ngIf="!nodes"></nz-empty>
+<nz-alert
+  style="margin-bottom: 24px"
+  [hidden]="!page || (page && page.totalCount < 999)"
+  nzType="error"
+  nzMessage="数据超出单页可显示最大值，请联系管理员增加单页显示数量"
+></nz-alert>
+
+<!-- <st [data]="expandDataCache[1]" [columns]="columns" [ps]="ps">
+  <ng-template st-row="title" let-c>
+    <span [ngStyle]="{ paddingLeft: 24 * c.level + 'px' }"></span>
+    ├---
+    <span>{{ c.title }}</span>
+  </ng-template>
+</st> -->
+<nz-table #nzTable *ngIf="nodes" [nzData]="nodes" class="node-list" [nzShowPagination]="false" nzTableLayout="fixed">
+  <thead>
+    <tr>
+      <th *ngFor="let c of columns; let cIdx = index" [attr.data-col-index]="cIdx" [ngClass]="c.className" [nzWidth]="c.width"
+        >{{ c.title }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-template ngFor let-data [ngForOf]="nzTable.data">
+      <ng-template ngFor let-item [ngForOf]="expandDataCache[data.nodeId]">
+        <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
+          <ng-container *ngFor="let c of columns; let cIdx = index">
+            <td *ngIf="c.render !== 'title'" [attr.data-col-index]="cIdx" [ngClass]="c.className">
+              <div [ngStyle]="{ width: c.width }" nz-tooltip [nzTooltipTitle]="tooltipTpl">
+                <ng-container *ngIf="!c.render"> {{ c.format ? c.format(item, c, cIdx) : item[c.index] }} </ng-container>
+                <ng-container *ngIf="c.render">
+                  <!-- {{ c.render }} -->
+                </ng-container>
+              </div>
+              <ng-template #tooltipTpl>
+                <div [innerHTML]="(c.format ? c.format(item, c, cIdx) : item[c.index]).toString() || '' | nl2br | html"> </div>
+              </ng-template>
+            </td>
+            <td
+              *ngIf="c.render === 'title'"
+              style="min-width: 200px"
+              [nzIndentSize]="item.level * indentSize"
+              [nzShowExpand]="item.children?.length > 0"
+              [(nzExpand)]="item.expand"
+              (nzExpandChange)="collapse(expandDataCache[data.nodeId], item, $event)"
+              [attr.data-col-index]="cIdx"
+              [ngClass]="c.className"
+            >
+              <a (click)="_clickTitle(item)">{{ item.nodeId }}.{{ item.title }}</a>
+            </td>
+          </ng-container>
+          <!-- <td> -->
+          <!-- <span *ngIf="!item.children?.length > 0" class=""></span> -->
+          <!-- <a *ngIf="acl.can([21])" (click)="_update(item)">{{ item.nodeId }}.{{ item.title }}</a> -->
+          <!-- <ng-container *ngIf="!acl.can([21])">{{ item.nodeId }}.{{ item.title }}</ng-container> -->
+          <!-- </td> -->
+          <!-- <td style="width: 300px">
+            <div style="width: 300px" class="text-truncate" [innerHTML]="item.remark"></div>
+            <ng-template #tooltipTpl>
+              <div [innerHTML]="item.remark | html"> </div>
+            </ng-template>
+          </td>
+          <td>{{ item.code }}</td>
+          <td>{{ item.category }}</td>
+          <td>{{ item.isMenu ? '是' : '否' }}</td>
+          <td>{{ item.status ? '有效' : '无效' }}</td>
+          <td>{{ item.rankValue }}</td> -->
+          <!-- <td>
+            <button nz-button>关联接口</button>
+          </td> -->
+        </tr>
+      </ng-template>
+    </ng-template>
+  </tbody>
+</nz-table>
+<ng-template #button> 123 </ng-template>

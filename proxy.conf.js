@@ -14,13 +14,13 @@ module.exports = {
   //   secure: false, // Ignore invalid SSL certificates
   //   changeOrigin: true
   // }
-  'system': {
+  '/system/': {
     target: 'http://localhost:20001/',
     secure: false, // Ignore invalid SSL certificates
     changeOrigin: true,
     logging: "info",
     pathRewrite: {
-      "^system": "/"
+      "^/system/": "/"
     }
   }
 };

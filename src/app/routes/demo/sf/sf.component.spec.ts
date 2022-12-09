@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThemeComponent } from './theme.component';
+import { SfComponent } from './sf.component';
 
-describe('ThemeComponent', () => {
-  let component: ThemeComponent;
-  let fixture: ComponentFixture<ThemeComponent>;
+describe('SfComponent', () => {
+  let component: SfComponent;
+  let fixture: ComponentFixture<SfComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ThemeComponent ]
+      declarations: [ SfComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ThemeComponent);
+    fixture = TestBed.createComponent(SfComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,46 +8,29 @@ import { environment } from '@env/environment';
   template: `
     <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="contentTpl" [customError]="null">
       <layout-default-header-item direction="left">
-        <a layout-default-header-item-trigger href="//github.com/ng-alain/ng-alain" target="_blank">
+        <a layout-default-header-item-trigger href="//github.com/future-cube/ng-lib" target="_blank">
           <i nz-icon nzType="github"></i>
         </a>
       </layout-default-header-item>
-      <layout-default-header-item direction="left" hidden="mobile">
-        <a layout-default-header-item-trigger routerLink="/passport/lock">
-          <i nz-icon nzType="lock"></i>
+      <layout-default-header-item direction="left">
+        <a layout-default-header-item-trigger href="//www.npmjs.com/package/@future-cube/theme" target="_blank">
+          <i nz-icon nzType="tags" nzTheme="outline"></i>
         </a>
       </layout-default-header-item>
-      <layout-default-header-item direction="left" hidden="pc">
-        <div layout-default-header-item-trigger (click)="searchToggleStatus = !searchToggleStatus">
-          <i nz-icon nzType="search"></i>
-        </div>
-      </layout-default-header-item>
-      <layout-default-header-item direction="middle">
-        <header-search class="alain-default__search" [toggleChange]="searchToggleStatus"></header-search>
-      </layout-default-header-item>
-      <layout-default-header-item direction="right" hidden="mobile">
-        <div layout-default-header-item-trigger nz-dropdown [nzDropdownMenu]="settingsMenu" nzTrigger="click" nzPlacement="bottomRight">
-          <i nz-icon nzType="setting"></i>
-        </div>
-        <nz-dropdown-menu #settingsMenu="nzDropdownMenu">
-          <div nz-menu style="width: 200px;">
-            <div nz-menu-item>
-              <header-fullscreen></header-fullscreen>
-            </div>
-            <div nz-menu-item>
-              <header-clear-storage></header-clear-storage>
-            </div>
-            <div nz-menu-item>
-              <header-i18n></header-i18n>
-            </div>
-          </div>
-        </nz-dropdown-menu>
+      <layout-default-header-item direction="right">
+        <a layout-default-header-item-trigger routerLink="/demo"> 演示 </a>
       </layout-default-header-item>
       <layout-default-header-item direction="right">
-        <header-user></header-user>
+        <a layout-default-header-item-trigger routerLink="/doc"> 文档 </a>
       </layout-default-header-item>
+      <layout-default-header-item direction="right">
+        <a layout-default-header-item-trigger routerLink="/settings"> 设置 </a>
+      </layout-default-header-item>
+      <!-- <layout-default-header-item direction="right">
+        <header-user></header-user>
+      </layout-default-header-item> -->
       <ng-template #asideUserTpl>
-        <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="alain-default__aside-user">
+        <!-- <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="alain-default__aside-user">
           <nz-avatar class="alain-default__aside-user-avatar" [nzSrc]="user.avatar"></nz-avatar>
           <div class="alain-default__aside-user-info">
             <strong>{{ user.name }}</strong>
@@ -59,21 +42,18 @@ import { environment } from '@env/environment';
             <li nz-menu-item routerLink="/pro/account/center">{{ 'menu.account.center' | i18n }}</li>
             <li nz-menu-item routerLink="/pro/account/settings">{{ 'menu.account.settings' | i18n }}</li>
           </ul>
-        </nz-dropdown-menu>
+        </nz-dropdown-menu> -->
       </ng-template>
       <ng-template #contentTpl>
         <router-outlet></router-outlet>
       </ng-template>
     </layout-default>
-
-    <setting-drawer *ngIf="showSettingDrawer"></setting-drawer>
-    <theme-btn></theme-btn>
-  `,
+  `
 })
 export class LayoutBasicComponent {
   options: LayoutDefaultOptions = {
     logoExpanded: `./assets/logo-full.svg`,
-    logoCollapsed: `./assets/logo.svg`,
+    logoCollapsed: `./assets/logo.svg`
   };
   searchToggleStatus = false;
   showSettingDrawer = !environment.production;

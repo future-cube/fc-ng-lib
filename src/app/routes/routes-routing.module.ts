@@ -5,6 +5,7 @@ import { SimpleGuard } from '@delon/auth';
 import { environment } from '@env/environment';
 
 // layout
+import { UpdateMenuResolver } from '../core/update-menu.resolver';
 import { LayoutBasicComponent } from '../layout/basic/basic.component';
 import { LayoutBlankComponent } from '../layout/blank/blank.component';
 import { LayoutPassportComponent } from '../layout/passport/passport.component';
@@ -19,22 +20,39 @@ import { UserRegisterResultComponent } from './passport/register-result/register
 import { UserRegisterComponent } from './passport/register/register.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'demo', pathMatch: 'full' },
   {
-    path: '',
-    component: LayoutBasicComponent,
-    loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)
-  },
-  {
-    path: 'demo',
+    path: 'dashboard',
     component: LayoutBasicComponent,
     canActivate: [startPageGuard], // SimpleGuard
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘' } },
       { path: 'exception', loadChildren: () => import('./exception/exception.module').then(m => m.ExceptionModule) }
       // 业务子模块
       // { path: 'widgets', loadChildren: () => import('./widgets/widgets.module').then(m => m.WidgetsModule) },
     ]
+  },
+  {
+    path: 'settings',
+    component: LayoutBasicComponent,
+    resolve: { menus: UpdateMenuResolver },
+    data: { moduleId: 'settings', title: '系统设置' },
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
+  },
+  {
+    path: 'demo',
+    component: LayoutBasicComponent,
+    resolve: { menus: UpdateMenuResolver },
+    data: { moduleId: 'demo' },
+    loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)
+  },
+  {
+    path: 'doc',
+    component: LayoutBasicComponent,
+    resolve: { menus: UpdateMenuResolver },
+    data: { moduleId: 'doc' },
+    loadChildren: () => import('./doc/doc.module').then(m => m.DocModule)
   },
   // 空白布局
   {
