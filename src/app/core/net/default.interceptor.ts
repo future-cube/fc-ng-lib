@@ -5,6 +5,7 @@ import {
   HttpHeaders,
   HttpInterceptor,
   HttpRequest,
+  HttpResponse,
   HttpResponseBase
 } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
@@ -176,6 +177,22 @@ export class DefaultInterceptor implements HttpInterceptor {
     // 业务处理：一些通用操作
     switch (ev.status) {
       case 200:
+        // #region 适配本地请求
+        if (ev instanceof HttpResponse) {
+          const body = ev.body;
+          // 通过mock获取的数据，直接返回
+          if (body.success === undefined) {
+            break;
+          }
+          if (body && body.success === false) {
+            return of({});
+          }
+          if (body && body.success === true) {
+            const newEv = ev.clone({ body: body.data });
+            return of(newEv);
+          }
+        }
+        // #endregion
         // 业务层级错误处理，以下是假定restful有一套统一输出格式（指不管成功与否都有相应的数据格式）情况下进行处理
         // 例如响应内容：
         //  错误内容：{ status: 1, msg: '非法参数' }

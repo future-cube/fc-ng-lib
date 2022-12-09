@@ -1,0 +1,6 @@
+<page-header title="菜单管理"></page-header>
+
+<nz-card nzTitle="节点列表" [nzExtra]="extraTemplate">
+  <fc-menu-manage #fmm [url]="url" [idMapName]="'nodeId'" [parentIdMapName]="'topId'" (clickTitle)="clickTitle($event)"> </fc-menu-manage>
+</nz-card>
+<ng-template #extraTemplate> </ng-template>

@@ -1,4 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { DemoTableColumnsComponent } from './table-columns.component';
 
 describe('DemoTableColumnsComponent', () => {
@@ -7,9 +8,8 @@ describe('DemoTableColumnsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DemoTableColumnsComponent ]
-    })
-    .compileComponents();
+      declarations: [DemoTableColumnsComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

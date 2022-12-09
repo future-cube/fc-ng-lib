@@ -7,6 +7,7 @@ import { DelonFormModule } from '@delon/form';
 import { AlainThemeModule } from '@delon/theme';
 
 import { SHARED_DELON_MODULES } from './shared-delon.module';
+import { SHARED_FC_MODULES } from './shared-fc.module';
 import { SHARED_ZORRO_MODULES } from './shared-zorro.module';
 
 // #region third libs
@@ -22,6 +23,17 @@ const DIRECTIVES: Array<Type<void>> = [];
 
 // #endregion
 
+// QuillModule.forRoot(),
+// // 不应该在此处配置，应该放到
+// QuillConfigModule.forRoot({
+//   format: 'json',
+//   modules: {
+//     syntax: false
+//   }
+// }),
+// QuillModule,
+// QuillConfigModule,
+
 @NgModule({
   imports: [
     CommonModule,
@@ -31,6 +43,7 @@ const DIRECTIVES: Array<Type<void>> = [];
     AlainThemeModule.forChild(),
     DelonACLModule,
     DelonFormModule,
+    SHARED_FC_MODULES,
     ...SHARED_DELON_MODULES,
     ...SHARED_ZORRO_MODULES,
     // third libs
@@ -49,6 +62,7 @@ const DIRECTIVES: Array<Type<void>> = [];
     AlainThemeModule,
     DelonACLModule,
     DelonFormModule,
+    SHARED_FC_MODULES,
     ...SHARED_DELON_MODULES,
     ...SHARED_ZORRO_MODULES,
     // third libs

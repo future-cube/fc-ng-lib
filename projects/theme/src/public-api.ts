@@ -2,8 +2,15 @@
  * Public API Surface of theme
  */
 
-// export * from './lib/theme.service';
-// export * from './lib/theme.component';
-// export * from './lib/theme.module';
-export * from './services';
-export * from './pipes';
+// 服务
+export * from './theme/theme.module';
+// 服务
+export * from './theme/services';
+// 管道
+export * from './theme/pipes';
+// 动态表单挂件
+export * from './sf-widget';
+// 组件
+export * from './components';
+// 指令
+export * from './directives';

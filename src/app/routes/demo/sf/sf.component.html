@@ -1,0 +1,15 @@
+<page-header></page-header>
+<input nz-input [(ngModel)]="id" />
+<a (click)="load(id)">load data</a>
+<hr />
+<sf [schema]="schema" #sf [formData]="data" (formSubmit)="submit($event)"></sf>
+
+<hr />
+<!-- <div *ngIf="data">
+  {{ data | json }}
+</div> -->
+<!-- <quill-view *ngIf="data && data.content" [content]="data.content"> </quill-view> -->
+
+<button nz-button (click)="test1()">test</button>
+<button nz-button (click)="test2()">test</button>
+<button nz-button (click)="test3()">test</button>

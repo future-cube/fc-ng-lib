@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { DelonFormModule, WidgetRegistry } from '@delon/form';
+// import { QuillWidget } from '@future-cube/theme';
 
 import { SharedModule } from '../shared.module';
-import { TestWidget } from './test/test.widget';
 
-export const SCHEMA_THIRDS_COMPONENTS = [TestWidget];
+export const SCHEMA_THIRDS_COMPONENTS = [];
 
 @NgModule({
   declarations: SCHEMA_THIRDS_COMPONENTS,
@@ -13,6 +13,6 @@ export const SCHEMA_THIRDS_COMPONENTS = [TestWidget];
 })
 export class JsonSchemaModule {
   constructor(widgetRegistry: WidgetRegistry) {
-    widgetRegistry.register(TestWidget.KEY, TestWidget);
+    // widgetRegistry.register(QuillWidget.KEY, QuillWidget);
   }
 }
