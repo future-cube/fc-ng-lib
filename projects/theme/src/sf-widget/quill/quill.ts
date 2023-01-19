@@ -5,13 +5,16 @@ import { Blur, ContentChange, EditorChangeContent, EditorChangeSelection, Focus,
 import Quill from 'quill';
 
 import { FcConfigService } from './../../theme/services/config';
-import { SfQuillConfig } from './types';
+import { isJsonString, SfQuillConfig } from './types';
 // import QuillMarkdown from 'quilljs-markdown';
 // @link https://kang-bing-kui.gitbook.io/quill/wen-dang-document/configuration 手册
 // @link https://www.kancloud.cn/liuwave/quill/1409379 手册
 // @link https://blog.csdn.net/React_Community/article/details/123492567 Yjs的实现
 
 declare const QuillMarkdown: any;
+
+// @todo 比较、合成 Demo
+// @link https://codepen.io/percipient24/pen/eEBOjG
 
 @Component({
   selector: 'quill',
@@ -75,6 +78,7 @@ export class QuillWidget extends ControlWidget implements OnInit {
 
   // 组件所需要的参数，建议使用 `ngOnInit` 获取
   config: SfQuillConfig = {
+    placeholder: '请输入内容',
     required: false,
     customToolbarPosition: 'top',
     styles: { height: '300px' },
@@ -106,8 +110,6 @@ export class QuillWidget extends ControlWidget implements OnInit {
     const config = this.fcs.merge('quill', this.config);
     // 使用动态表单传入的值替换值
     this.config = deepMerge({}, config, this.ui['config']);
-
-    console.log(deepCopy(this.config));
   }
 
   private get deltaProperty(): FormProperty | undefined {
@@ -119,6 +121,11 @@ export class QuillWidget extends ControlWidget implements OnInit {
 
   // reset 可以更好的解决表单重置过程中所需要的新数据问题
   override reset(value: string) {
+    if (isJsonString(value)) {
+      this.config.format = 'object';
+      value = JSON.parse(value);
+      console.log(this.config, value);
+    }
     this.content = value || '';
     this.setValue(value);
     this.detectChanges();
@@ -127,8 +134,8 @@ export class QuillWidget extends ControlWidget implements OnInit {
   // 修改内容后的处理
   change(value: ContentChange) {
     this.setValue(value.html || '');
+    this.deltaProperty?.resetValue(JSON.stringify(value.content), false);
     this.detectChanges();
-    this.deltaProperty?.resetValue(JSON.stringify(value.content), true);
     this.deltaProperty?.widget.detectChanges();
     if (this.ui['change']) this.ui['change'](value);
   }
@@ -143,7 +150,9 @@ export class QuillWidget extends ControlWidget implements OnInit {
         `//cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown-common-style.css`
       ])
       .then(() => {
-        const quillMarkdown = new QuillMarkdown(this.editor, {});
+        setTimeout(() => {
+          const quillMarkdown = new QuillMarkdown(this.editor, {});
+        }, 200);
         // do something
       });
   }

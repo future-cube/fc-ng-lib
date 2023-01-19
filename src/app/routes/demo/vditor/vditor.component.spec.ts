@@ -1,19 +1,19 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DocTableComponent } from './table.component';
+import { DemoVditorComponent } from './vditor.component';
 
-describe('DocTableComponent', () => {
-  let component: DocTableComponent;
-  let fixture: ComponentFixture<DocTableComponent>;
+describe('DemoVditorComponent', () => {
+  let component: DemoVditorComponent;
+  let fixture: ComponentFixture<DemoVditorComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DocTableComponent ]
+      declarations: [ DemoVditorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DocTableComponent);
+    fixture = TestBed.createComponent(DemoVditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

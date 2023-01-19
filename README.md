@@ -28,6 +28,67 @@
 > 部分功能需后端支持，基于Yii2框架开发。表格及表单功能开发完成后，统一提交到开源库中
 >
 
+## 使用方式
+### 全局配置
+`shared-fc.module.ts`
+``` typescript
+import { FcMenuManageModule, FcThemeModule, FcSfWidgetModule } from '@future-cube/theme';
+export const SHARED_FC_MODULES = [FcMenuManageModule, FcThemeModule, FcSfWidgetModule];
+```
+`shared.module.ts`
+``` typescript
+import { SHARED_FC_MODULES } from './shared-fc.module';
+@NgModule({
+  imports: [
+    ...SHARED_FC_MODULES
+  ],
+  exports: [
+    ...SHARED_FC_MODULES
+  ]
+});
+```
+`fc-config.module.ts`
+``` typescript
+/* eslint-disable import/order */
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { FcConfig, FC_CONFIG, SfQuillConfig } from '@future-cube/theme';
+import { throwIfAlreadyLoaded } from '@core';
+
+const fcConfig: FcConfig = {
+  st: { url: '/table/column' },
+  quill: { placeholder: 'test' } as SfQuillConfig
+};
+const fcProvides = [{ provide: FC_CONFIG, useValue: fcConfig }];
+
+@NgModule({
+  imports: []
+})
+export class FcConfigModule {
+  constructor(@Optional() @SkipSelf() parentModule: FcConfigModule) {
+    throwIfAlreadyLoaded(parentModule, 'FcConfigModule');
+  }
+
+  static forRoot(): ModuleWithProviders<FcConfigModule> {
+    return {
+      ngModule: FcConfigModule,
+      providers: [...fcProvides]
+    };
+  }
+}
+```
+
+`app.module.ts`
+``` typescript
+import { FcConfigModule } from './fc-config.module';
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    FcConfigModule.forRoot(),
+  ]
+})
+```
+
+
 ## Features
 
 - [X] 全局配置
@@ -61,10 +122,12 @@
     - [ ] 表单配置生成器（见上方表单增强）
     - [ ] 表格配置生成器（见上方表格增强）
 - [ ] 其他待补充功能
+  - [ ] 修复编辑器Markdown支持插件使用CDN容易报错的问题。
 
 ## App Shots
 
 ![表格](https://user-images.githubusercontent.com/2936579/205030235-b49891b5-cd0a-414a-9a2a-869ab43c7452.png)
+
 
 
 ### License

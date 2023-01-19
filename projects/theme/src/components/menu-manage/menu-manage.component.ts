@@ -27,6 +27,8 @@ export class MenuManageComponent implements OnInit {
   // 单级别缩进长度
   @Input() indentSize: number = 24;
 
+  @Input() scroll: { x?: string; y?: string } | undefined = { x: '1600px' };
+
   // 列配置
   @Input() columns: any[] = [
     { title: '菜单名称', index: 'title', render: 'title', width: '360px' },

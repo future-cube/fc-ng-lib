@@ -1,0 +1,20 @@
+<page-header [action]="actionTpl"></page-header>
+<ng-template #actionTpl>
+  <a nz-button nzType="primary" routerLink="/doc/create">登记文档</a>
+</ng-template>
+
+<nz-card>
+  <st
+    #st
+    [data]="url"
+    [columns]="columns"
+    [scroll]="{ x: '800px' }"
+    [widthMode]="{ type: 'strict' }"
+    resizable
+    [res]="{ reName: { list: 'items' } }"
+    [req]="{ lazyLoad: true }"
+    [ps]="100"
+    size="default"
+  >
+  </st>
+</nz-card>

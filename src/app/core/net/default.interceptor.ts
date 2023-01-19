@@ -149,7 +149,7 @@ export class DefaultInterceptor implements HttpInterceptor {
       .pipe(
         filter(() => !this.refreshToking),
         switchMap(res => {
-          console.log(res);
+          // console.log(res);
           this.refreshToking = true;
           return this.refreshTokenRequest();
         })
@@ -258,12 +258,10 @@ export class DefaultInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // 统一加上服务端前缀
     let url = req.url;
-    console.log(copy(url));
     if (!req.context.get(IGNORE_BASE_URL) && !url.startsWith('https://') && !url.startsWith('http://')) {
       const { baseUrl } = environment.api;
       url = baseUrl + (baseUrl.endsWith('/') && url.startsWith('/') ? url.substring(1) : url);
     }
-    console.log(copy(url));
     const newReq = req.clone({ url, setHeaders: this.getAdditionalHeaders(req.headers) });
     return next.handle(newReq).pipe(
       mergeMap(ev => {

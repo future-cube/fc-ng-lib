@@ -1,6 +1,9 @@
-<page-header [title]="doc ? doc.title : '-'"></page-header>
+<page-header [title]="doc ? doc.title : '-'" [action]="actionTpl"></page-header>
+<ng-template #actionTpl>
+  <a *ngIf="id" nz-button nzType="primary" routerLink="/doc/edit/{{ id }}">修改</a>
+</ng-template>
 
-<nz-card nzTitle="文档内容">
+<nz-card [nzTitle]="''">
   <ng-container *ngIf="doc">
     <quill-view [content]="doc.content"></quill-view>
   </ng-container>

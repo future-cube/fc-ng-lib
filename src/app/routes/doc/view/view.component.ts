@@ -11,14 +11,15 @@ export class DocViewComponent implements OnInit {
   doc?: any;
   constructor(private http: _HttpClient, private route: ActivatedRoute) {
     this.route.params.subscribe((res: any) => {
-      this.load(res.id);
+      this.id = res.id;
+      this.load();
     });
   }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {}
-  load(id: string) {
-    this.http.get('system/doc/view', { id }).subscribe((res: any) => {
+  load() {
+    this.http.get('system/doc/view', { id: this.id }).subscribe((res: any) => {
       this.doc = res;
     });
   }

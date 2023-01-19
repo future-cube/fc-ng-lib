@@ -1,0 +1,24 @@
+<page-header title="表格服务演示" [content]="contentTpl" [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <button (click)="add()" nz-button nzType="primary">新建</button>
+  </ng-template>
+  <ng-template #contentTpl>
+    <div>该页面分两部分,一部分是显示登记的表,另一部分显示未登记的表</div>
+  </ng-template>
+</page-header>
+<nz-card>
+  <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
+  <st
+    #st
+    [data]="url"
+    [columns]="columns"
+    [scroll]="{ x: '800px' }"
+    [widthMode]="{ type: 'strict' }"
+    resizable
+    [res]="{ reName: { list: 'items' } }"
+    [req]="{ lazyLoad: true }"
+    [ps]="100"
+    size="default"
+  >
+  </st>
+</nz-card>

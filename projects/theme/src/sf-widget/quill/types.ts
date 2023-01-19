@@ -30,3 +30,12 @@ export interface SfQuillConfig {
   debounceTime?: number;
   defaultEmptyValue?: any;
 }
+
+export function isJsonString(str: string): boolean {
+  try {
+    if (typeof JSON.parse(str) == 'object') {
+      return true;
+    }
+  } catch (e) {}
+  return false;
+}

@@ -13,7 +13,15 @@
     <span>{{ c.title }}</span>
   </ng-template>
 </st> -->
-<nz-table #nzTable *ngIf="nodes" [nzData]="nodes" class="node-list" [nzShowPagination]="false" nzTableLayout="fixed">
+<nz-table
+  #nzTable
+  *ngIf="nodes"
+  [nzData]="nodes"
+  class="node-list"
+  [nzShowPagination]="false"
+  nzTableLayout="fixed"
+  [nzScroll]="{ x: '1141px' }"
+>
   <thead>
     <tr>
       <th *ngFor="let c of columns; let cIdx = index" [attr.data-col-index]="cIdx" [ngClass]="c.className" [nzWidth]="c.width"

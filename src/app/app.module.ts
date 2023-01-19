@@ -95,6 +95,7 @@ import { SharedModule } from './shared/shared.module';
     RoutesModule,
     NzMessageModule,
     NzNotificationModule,
+    // 测试Vditor
     ...FORM_MODULES,
     ...GLOBAL_THIRD_MODULES
   ],
