@@ -18,7 +18,7 @@ export const FC_ST_OPTIONS = new InjectionToken<FcStOptions>('fc-st-options');
 export class STHelperService {
   // 请求列配置参数的接口地址(应该让调用的时候再配置，如果未配置，则提示用户配置)
   options: FcStOptions = {
-    url: 'system/sf-schema/schema'
+    url: 'system/config/sf/schema'
   };
 
   private columns: { [propName: string]: any } = {}; // 存储指定键值，避免重复从后端请求
@@ -37,7 +37,15 @@ export class STHelperService {
     return this.injector.get(CacheService);
   }
 
-  public getColumns(key: string, extend?: { [key: string]: STColumn }): Observable<any> {
+  /**
+   * 从远程获取列配置,并扩展及增加配置项
+   *
+   * @param key 远程接口地址
+   * @param extend 扩展,用于修改远程获取到的配置项
+   * @param otherColumn 增加其他配置项
+   * @returns
+   */
+  public getColumns(key: string, extend?: { [key: string]: STColumn }, otherColumn: STColumn[] = []): Observable<any> {
     // 必需提供键名
     if (!key) {
       throw new Error(`[${ServiceName}] => 必需表明需要获取的表格配置键名.`);
@@ -51,7 +59,8 @@ export class STHelperService {
     return new Observable<any>(observer => {
       if (extend === undefined) {
         this.columns[key].subscribe((res: STColumn[]) => {
-          console.log(res);
+          // console.log(res);
+          if (otherColumn.length) res = res.concat(otherColumn);
           observer.next(res);
           observer.complete();
         });
@@ -65,6 +74,7 @@ export class STHelperService {
           }
           return column;
         });
+        if (otherColumn.length) res = res.concat(otherColumn);
         observer.next(res);
         observer.complete();
       });

@@ -185,6 +185,7 @@ export class DefaultInterceptor implements HttpInterceptor {
             break;
           }
           if (body && body.success === false) {
+            this.notification.error('请求数据时发生错误', body.data.message);
             return of({});
           }
           if (body && body.success === true) {

@@ -6,19 +6,25 @@
     <div>该页面分两部分,一部分是显示登记的表,另一部分显示未登记的表</div>
   </ng-template>
 </page-header>
-<nz-card>
+<nz-spin [nzTip]="'Loading...'" [nzSpinning]="no_register_table === undefined">
+  <nz-card nzTitle="未注册的表" [nzExtra]="extra">
+    <ng-template #extra>
+      <button nz-button nzType="link" (click)="loadNoRegister()">刷新数据</button>
+      <button nz-button nzType="link" (click)="importTable()" [hidden]="!no_register_table?.length">导入全部</button>
+    </ng-template>
+    <div nz-row [nzGutter]="16">
+      <div nz-col class="gutter-row" [nzSpan]="6" class="p-md" *ngFor="let tableName of no_register_table">
+        {{ tableName }}
+        <a (click)="importTable(tableName)">导入</a>
+      </div>
+    </div>
+    <div class="text-center" [hidden]="!no_register_table || (no_register_table && no_register_table.length)">恭喜,所有的表均已注册</div>
+  </nz-card>
+</nz-spin>
+<nz-card nzTitle="已注册的表" [nzExtra]="extra2">
+  <ng-template #extra2>
+    <button nz-button nzType="link" (click)="syncTable()">同步全部</button>
+  </ng-template>
   <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
-  <st
-    #st
-    [data]="url"
-    [columns]="columns"
-    [scroll]="{ x: '800px' }"
-    [widthMode]="{ type: 'strict' }"
-    resizable
-    [res]="{ reName: { list: 'items' } }"
-    [req]="{ lazyLoad: true }"
-    [ps]="100"
-    size="default"
-  >
-  </st>
+  <st #st [data]="url" [columns]="columns" [scroll]="{ x: '800px' }" resizable [res]="{ process: process }"> </st>
 </nz-card>

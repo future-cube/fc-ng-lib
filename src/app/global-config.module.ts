@@ -16,7 +16,9 @@ const alainConfig: AlainConfig = {
   st: {
     modal: { size: 'lg' },
     req: { type: 'page', reName: { pi: 'page', ps: 'ps' } },
-    res: { reName: { total: 'page.totalCount', list: 'items' } }
+    res: { reName: { total: 'page.totalCount', list: 'items' } },
+    ps: 20,
+    page: { showSize: true }
   },
   pageHeader: { homeI18n: 'home' },
   lodop: {

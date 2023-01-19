@@ -4,7 +4,7 @@ import { FcConfig, FC_CONFIG, SfQuillConfig } from '@future-cube/theme';
 import { throwIfAlreadyLoaded } from '@core';
 
 const fcConfig: FcConfig = {
-  st: { url: 'system//st-schema/schema' },
+  st: { url: 'system/config/st/schema' },
   quill: { placeholder: '请输入内容' } as SfQuillConfig
 };
 const fcProvides = [{ provide: FC_CONFIG, useValue: fcConfig }];
