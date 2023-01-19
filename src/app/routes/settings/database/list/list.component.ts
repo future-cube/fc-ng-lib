@@ -26,7 +26,7 @@ export class SettingsDatabaseListComponent implements OnInit {
     ENGINE: {
       format: (i: any, col: any, index: any) => {
         console.log(i);
-        return i.ENGINE === i._ENGINE ? i.ENGINE : `${i.ENGINE}<small>(${i._ENGINE})</small>`;
+        return i.ENGINE === i._ENGINE ? i.ENGINE : `<font class="font-red">≠</font>`;
       }
     }
   };
@@ -38,7 +38,7 @@ export class SettingsDatabaseListComponent implements OnInit {
   constructor(public appHelper: AppHelperService) {}
 
   ngOnInit(): void {
-    this.appHelper.stHelper.getColumns('dev_table', this.columns_extend).subscribe(res => {
+    this.appHelper.stHelper.getColumns('dev_table', this.columns_extend).subscribe((res: any) => {
       this.st.resetColumns({ columns: res, emitReload: true });
     });
   }
