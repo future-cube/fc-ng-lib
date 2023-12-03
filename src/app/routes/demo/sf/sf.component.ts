@@ -1,7 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SFComponent, SFRadioWidgetSchema, SFSchema } from '@delon/form';
-import { Nl2brPipe, AppHelperService, SfQuillConfig } from '@future-cube/theme';
+import { Nl2brPipe } from '@future-cube/ng-lib/pipes';
+import { AppHelperService } from '@future-cube/ng-lib/services';
+import { SfQuillConfig } from '@future-cube/ng-lib/sf-widget';
 
 @Component({
   selector: 'app-sf',

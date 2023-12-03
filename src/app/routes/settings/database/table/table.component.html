@@ -1,0 +1,22 @@
+<nz-spin [nzTip]="'Loading...'" [nzSpinning]="no_register_column === undefined">
+  <nz-card nzTitle="未注册的表" [nzExtra]="extra">
+    <ng-template #extra>
+      <button nz-button nzType="link" (click)="loadNoRegister()">刷新数据</button>
+      <button nz-button nzType="link" (click)="importColumn()" [hidden]="!no_register_column?.length">导入全部</button>
+    </ng-template>
+    <div nz-row [nzGutter]="16">
+      <div nz-col class="gutter-row" [nzSpan]="6" class="p-md" *ngFor="let columnName of no_register_column">
+        {{ columnName }}
+        <a (click)="importColumn(columnName)">导入</a>
+      </div>
+    </div>
+    <div class="text-center" [hidden]="!no_register_column || (no_register_column && no_register_column.length)">恭喜,所有的列均已注册</div>
+  </nz-card>
+</nz-spin>
+<nz-card nzTitle="已注册的表" [nzExtra]="extra2">
+  <ng-template #extra2>
+    <button nz-button nzType="link" (click)="syncColumn()">同步全部</button>
+  </ng-template>
+  <sf mode="search" [schema]="searchSchema" [formData]="params" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
+  <st #st [data]="url" [columns]="columns" [scroll]="{ x: '800px' }" resizable [res]="{ process: process }" [req]="{params}"> </st>
+</nz-card>

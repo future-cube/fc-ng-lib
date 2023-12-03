@@ -1,13 +1,14 @@
 /* eslint-disable import/order */
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { FcConfig, FC_CONFIG, SfQuillConfig } from '@future-cube/theme';
+import { SfQuillConfig } from '@future-cube/ng-lib/sf-widget';
 import { throwIfAlreadyLoaded } from '@core';
+import { FcConfig, FC_CONFIG_FACTORY } from '@future-cube/ng-lib/services';
 
 const fcConfig: FcConfig = {
-  st: { url: 'system/config/st/schema' },
+  st: { url: 'system/st/config/column' },
   quill: { placeholder: '请输入内容' } as SfQuillConfig
 };
-const fcProvides = [{ provide: FC_CONFIG, useValue: fcConfig }];
+const fcProvides = [{ provide: FC_CONFIG_FACTORY, useValue: fcConfig }];
 
 @NgModule({
   imports: []

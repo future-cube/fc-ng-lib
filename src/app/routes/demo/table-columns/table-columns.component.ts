@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { STComponent } from '@delon/abc/st';
-import { AppHelperService } from '@future-cube/theme';
+import { AppHelperService } from '@future-cube/ng-lib/services';
 
 @Component({
   selector: 'app-demo-table-columns',

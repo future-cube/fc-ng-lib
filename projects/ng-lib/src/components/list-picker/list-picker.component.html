@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <div class="modal-title">{{ title }}</div>
+</div>
+
+<sf
+  *ngIf="schema"
+  #sf
+  mode="search"
+  [schema]="schema"
+  [ui]="ui || {}"
+  (formSubmit)="st.reload($event)"
+  (formReset)="st.reload($event)"
+></sf>
+<st
+  *ngIf="url"
+  #st
+  size="small"
+  [data]="url"
+  [widthMode]="{ type: 'strict', strictBehavior: 'truncate' }"
+  [columns]="columns"
+  [ps]="ps"
+  [req]="{ params: params }"
+  [res]="{ process: dataChange }"
+  resizable
+  [scroll]="scroll"
+  (change)="change($event)"
+></st>
+
+<div class="modal-footer">
+  <button nz-button [nzType]="'default'" (click)="cancel()"> 取消 </button>
+  <button nz-button [nzType]="'primary'" (click)="ok()"> 确认 </button>
+</div>

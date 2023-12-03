@@ -1,0 +1,9 @@
+<nz-spin [hidden]="i" class="modal-spin"></nz-spin>
+<sf [hidden]="!i" #sf mode="edit" [schema]="config.schema" [ui]="config.ui" [formData]="i" button="none">
+  <div class="modal-footer">
+    <button nz-button type="button" [hidden]="config.hideCloseBtn" (click)="close()">{{ config.closeBtnText || '关闭' }}</button>
+    <button nz-button type="submit" nzType="primary" (click)="save(sf.value)" [disabled]="!sf.valid" [nzLoading]="http.loading">
+      {{ config.saveBtnText || '保存' }}
+    </button>
+  </div>
+</sf>

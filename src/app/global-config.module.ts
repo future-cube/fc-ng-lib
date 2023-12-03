@@ -3,7 +3,7 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core
 import { DelonACLModule } from '@delon/acl';
 import { AlainThemeModule } from '@delon/theme';
 import { AlainConfig, ALAIN_CONFIG } from '@delon/util/config';
-import { FcConfig, FC_CONFIG } from '@future-cube/theme';
+import { FcConfig, FC_CONFIG } from '@future-cube/ng-lib/services';
 
 import { throwIfAlreadyLoaded } from '@core';
 
@@ -15,7 +15,7 @@ import { environment } from '@env/environment';
 const alainConfig: AlainConfig = {
   st: {
     modal: { size: 'lg' },
-    req: { type: 'page', reName: { pi: 'page', ps: 'ps' } },
+    req: { type: 'page', reName: { pi: 'page', ps: 'per-page' } },
     res: { reName: { total: 'page.totalCount', list: 'items' } },
     ps: 20,
     page: { showSize: true }
@@ -33,7 +33,7 @@ const alainModules: any[] = [AlainThemeModule.forRoot(), DelonACLModule.forRoot(
 const alainProvides = [{ provide: ALAIN_CONFIG, useValue: alainConfig }];
 
 const fcConfig: FcConfig = {
-  st: { url: '/table/column' }
+  st: { url: 'system/st/config/column' }
 };
 const fcProvides = [{ provide: FC_CONFIG, useValue: fcConfig }];
 

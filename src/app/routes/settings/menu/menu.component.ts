@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
-import { MenuManageComponent } from '@future-cube/theme';
+import { FcMenuManageComponent } from '@future-cube/ng-lib/components';
 
 @Component({
   selector: 'app-settings-menu',
@@ -8,7 +8,7 @@ import { MenuManageComponent } from '@future-cube/theme';
   templateUrl: './menu.component.html'
 })
 export class SettingsMenuComponent implements OnInit, AfterViewInit {
-  @ViewChild('fmm', { static: true }) fmm!: MenuManageComponent;
+  @ViewChild('fmm', { static: true }) fmm!: FcMenuManageComponent;
 
   // 显示到哪个级别，0为不限制
   level: number = 0;

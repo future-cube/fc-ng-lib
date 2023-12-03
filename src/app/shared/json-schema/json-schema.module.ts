@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { DelonFormModule, WidgetRegistry } from '@delon/form';
-// import { QuillWidget } from '@future-cube/theme';
+// import { QuillWidget } from '@future-cube/ng-lib/sf-widget';
 
 import { SharedModule } from '../shared.module';
 

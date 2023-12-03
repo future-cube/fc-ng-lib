@@ -1,0 +1,160 @@
+<page-header autoBreadcrumb="false" title="" [extra]="extraTpl">
+  <ng-template #extraTpl>
+    <button nz-button nzType="default" (click)="showEdit = !showEdit">修改信息</button>
+  </ng-template>
+  <div [hidden]="!showEdit">
+    <sf #sfBase [schema]="baseSchema" [mode]="'search'" [ui]="baseUi" [formData]="item" [button]="'none'">
+      <button nz-button nzType="primary" (click)="save(sfBase.value)">保存</button>
+    </sf>
+  </div>
+  <div [hidden]="showEdit">
+    <sv-container col="5">
+      <sv label="名称">{{ item.title }}</sv>
+      <sv label="令牌">{{ item.token }}</sv>
+      <sv label="状态">{{ item.status ? '有效' : '无效' }}</sv>
+      <sv label="说明" col="3">{{ item.desc }}</sv>
+    </sv-container>
+  </div>
+</page-header>
+<nz-affix [nzOffsetTop]="0" nzTarget=".ant-drawer-body">
+  <!-- class="ant-card__body-nopadding" -->
+  <nz-card
+    nzTitle="管理可用配置"
+    [hidden]="editSchemaIndex === undefined"
+    [nzBodyStyle]="{ 'box-shadow': '0px 15px 10px -15px #a7a7a7', border: 'none' }"
+  >
+    <div class="md-md">
+      <sf #sfSchemaKeys [schema]="schemaKeySchema" [button]="'none'"> </sf>
+    </div>
+  </nz-card>
+</nz-affix>
+<div class="mt-lg box d-flex" [ngClass]="{ 'show-config': editSchemaIndex !== undefined }">
+  <div class="columns-optional">
+    <nz-card nzTitle="备选列" [nzExtra]="extraColumn">
+      <ng-template #extraColumn>
+        <button nz-button nzType="link" (click)="loadColumnFromTable()">加载表字段</button>
+      </ng-template>
+      <sv-container col="1" [layout]="'vertical'">
+        <sv *ngFor="let option of options" label="{{ option['COLUMN_NAME'] }}">
+          {{ option['title'] || option['COLUMN_COMMENT'] || '-' }}
+          <a class="add-schema-btn" (click)="addSchema(option)">使用该列</a>
+        </sv>
+      </sv-container>
+      <nz-empty [hidden]="options.length" nzNotFoundContent="无已导入的备选列信息" nzNotFoundImage="simple"></nz-empty>
+    </nz-card>
+  </div>
+  <div class="columns-optional">
+    <nz-card nzTitle="已选列" [nzExtra]="extraManage">
+      <ng-template #extraManage>
+        拖动排序
+        <button nz-button nzType="link" (click)="addEmptySchema()">增加字段</button>
+      </ng-template>
+      <div
+        class="example-list"
+        cdkDropList
+        [cdkDropListData]="schemas"
+        [cdkDropListAutoScrollDisabled]="true"
+        (cdkDropListDropped)="drag($event)"
+      >
+        <div
+          *ngFor="let itemObj of schemas; let i = index"
+          cdkDrag
+          class="example-box"
+          [ngStyle]="{ 'border-color': editSchemaIndex === i ? 'red' : '' }"
+          [cdkDragPreviewContainer]="'parent'"
+          (dblclick)="editSchemaConfig(i)"
+        >
+          <svg width="24px" fill="currentColor" viewBox="0 0 24 24" [ngStyle]="{ color: editSchemaIndex === i ? 'red' : '' }">
+            <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+          <div class="title">{{ itemObj.value.title }}</div>
+          <div class="btn">
+            <a (click)="editSchemaConfig(i)"><i nz-icon nzType="edit"></i></a>
+            <a (click)="removeSchema(i)"><i nz-icon nzType="delete"></i></a>
+          </div>
+        </div>
+      </div>
+    </nz-card>
+  </div>
+  <div class="columns-config">
+    <nz-card nzTitle="修改列配置">
+      <sf
+        #sfConfigPropertie
+        [formData]="schemas[editSchemaIndex!]"
+        [schema]="configPropertieSchema"
+        [ui]="configPropertieUi"
+        [button]="'none'"
+      >
+        <div class="text-right">
+          <button nz-button nzType="primary" (click)="saveSchemaConfig()">保存</button>
+          <button nz-button nzType="primary" (click)="editSchemaIndex = undefined">取消</button>
+        </div>
+      </sf>
+      <sf
+        #sfConfigPropertieUi
+        [formData]="ui[editSchemaIndex!]"
+        [schema]="configPropertieUiSchema"
+        [ui]="configPropertieUiUi"
+        [button]="'none'"
+      >
+        <div class="text-right">
+          <button nz-button nzType="primary" (click)="saveSchemaConfig()">保存</button>
+          <button nz-button nzType="primary" (click)="editSchemaIndex = undefined">取消</button>
+        </div>
+      </sf>
+    </nz-card>
+  </div>
+  <div class="columns-preview">
+    <nz-card nzTitle="表单预览" [nzExtra]="extraPreView">
+      <ng-template #extraPreView> </ng-template>
+      <sf
+        #sfPreview
+        [mode]="config.mode || undefined"
+        [layout]="config.layout || 'horizontal'"
+        [firstVisual]="config.firstVisual || true"
+        [liveValidate]="config.liveValidate || true"
+        [disabled]="config.disabled || null"
+        [loading]="config.loading || false"
+        [noColon]="config.noColon || false"
+        [compact]="config.compact || false"
+        [cleanValue]="config.cleanValue || false"
+        [delay]="config.delay || false"
+        [schema]="previewSchema"
+        [ui]="previewUi"
+        button="none"
+      >
+        <div class="modal-footer">
+          <button nz-button nzType="primary" (click)="sfPreviewValidator()"> 验证表单 </button>
+          <button nz-button nzType="primary" nzDanger (click)="sfPreviewSaveSchema()">保存列配置</button>
+        </div>
+      </sf>
+    </nz-card>
+
+    <nz-row nzAlign="top" nzGutter="24">
+      <nz-col nzXXl="12" nzXl="24">
+        <nz-card nzTitle="调整基础配置" [nzExtra]="extraConfigBase">
+          <ng-template #extraConfigBase>实时预览，需在上方保存方可将配置存入系统</ng-template>
+          <sf
+            #sfConfigBase
+            mode="edit"
+            [schema]="configBaseSchema"
+            [ui]="configBaseUi"
+            [formData]="config"
+            [cleanValue]="true"
+            button="none"
+            (formValueChange)="sfConfigBaseChange($event)"
+          >
+          </sf>
+        </nz-card>
+      </nz-col>
+      <nz-col nzXXl="12" nzXl="24">
+        <nz-card nzTitle="调整表单整体布局" [nzExtra]="extraConfigUi">
+          <ng-template #extraConfigUi>实时预览，需在上方保存方可将配置存入系统</ng-template>
+          <sf #sfConfigUi [schema]="configUiSchema" [ui]="configUiUi" [formData]="previewUi['*']" (formChange)="sfConfigUiChange($event)">
+          </sf>
+        </nz-card>
+      </nz-col>
+    </nz-row>
+  </div>
+</div>

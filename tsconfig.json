@@ -32,11 +32,8 @@
       "@env/*": [
         "src/environments/*"
       ],
-      "@future-cube/theme": [
-        "projects/theme/index"
-      ],
-      "@future-cube/theme/*": [
-        "projects/theme/src/*"
+      "@future-cube/ng-lib/*": [
+        "projects/ng-lib/src/*"
       ],
       // "@future-cube/*": [
       //   "dist/@future-cube/*"

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { STComponent, STColumn } from '@delon/abc/st';
 import { _HttpClient } from '@delon/theme';
-import { AppHelperService } from '@future-cube/theme';
+import { AppHelperService } from '@future-cube/ng-lib/services';
 
 @Component({
   selector: 'app-doc-list',
@@ -28,7 +28,7 @@ export class DocListComponent implements OnInit {
   constructor(public appHelper: AppHelperService) {}
 
   ngOnInit(): void {
-    this.appHelper.stHelper.getColumns('dev_doc', this.columns_extend).subscribe(res => {
+    this.appHelper.stHelper.getColumns('doc_column_config', this.columns_extend).subscribe(res => {
       this.st.resetColumns({ columns: res, emitReload: true });
     });
   }

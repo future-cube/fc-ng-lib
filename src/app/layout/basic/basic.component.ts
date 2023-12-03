@@ -13,7 +13,7 @@ import { environment } from '@env/environment';
         </a>
       </layout-default-header-item>
       <layout-default-header-item direction="left">
-        <a layout-default-header-item-trigger href="//www.npmjs.com/package/@future-cube/theme" target="_blank">
+        <a layout-default-header-item-trigger href="//www.npmjs.com/package/@future-cube/ng-lib" target="_blank">
           <i nz-icon nzType="tags" nzTheme="outline"></i>
         </a>
       </layout-default-header-item>

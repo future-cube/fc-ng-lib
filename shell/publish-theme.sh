@@ -15,9 +15,12 @@ npm login
 # npx npm-login-with-param --username xingkoo --password "hVh*b4$J/nS.v9n" --email xingkoo@gmail.com
 
 echo "准备发布..."
-CURRENT_DIR=$(cd $(dirname $0); pwd)
+CURRENT_DIR=$(
+  cd $(dirname $0)
+  pwd
+)
 cd $CURRENT_DIR
-cd ../dist/@future-cube/theme
+cd ../dist/@future-cube/ng-lib
 pwd
 
 # echo "更新版本包..."
@@ -41,7 +44,6 @@ pwd
 #       ;;
 #   esac
 # done
-
 
 echo "发布中..."
 npm publish --access=public

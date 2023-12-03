@@ -1,0 +1,71 @@
+<div class="d-flex mt-md">
+  <div class="left">
+    <nz-card nzTitle="已选列" [nzExtra]="extraManage">
+      <ng-template #extraManage> 拖动排序 </ng-template>
+      <div
+        class="example-list"
+        cdkDropList
+        [cdkDropListData]="columns"
+        [cdkDropListAutoScrollDisabled]="true"
+        (cdkDropListDropped)="drag($event)"
+      >
+        <div
+          *ngFor="let itemObj of columns; let i = index"
+          class="container"
+          cdkDrag
+          class="example-box"
+          [cdkDragPreviewContainer]="'parent'"
+          (dblclick)="editColumnConfig(i)"
+        >
+          <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+          <div class="title">{{ itemObj.title || itemObj.index }}</div>
+          <div class="btn">
+            <a (click)="editColumnConfig(i)"><i nz-icon nzType="edit"></i></a>
+            <a (click)="removeColumn(i)"><i nz-icon nzType="delete"></i></a>
+          </div>
+        </div>
+      </div>
+    </nz-card>
+  </div>
+  <div class="right">
+    <!-- [hidden]="editColumnIndex === undefined" -->
+    <nz-card nzTitle="修改列配置">
+      <sf #sfColumnConfig [formData]="columns[editColumnIndex!]" [schema]="columnSchema" [ui]="columnUi" [button]="'none'">
+        <div style="margin-left: 200px">
+          <button nz-button nzType="primary" (click)="saveColumnConfig(sfColumnConfig.value)">保存</button>
+          <button nz-button nzType="primary" (click)="editColumnIndex = undefined">取消</button>
+        </div>
+      </sf>
+      <!-- <sf #sfColumnKeys *ngIf="editColumnIndex" layout="vertical" [schema]="columnKeySchema" [button]="'none'"> </sf> -->
+      <div class="text-grey">注意：实际上可以预设一些特定的方法，一键修改有效属性</div>
+    </nz-card>
+
+    <nz-card nzTitle="备选列" [nzExtra]="extraColumn">
+      <ng-template #extraColumn>
+        <button nz-button nzType="link" (click)="addEmptyColumn()">添加空白列</button>
+        <button nz-button nzType="link" (click)="loadColumnFromTable()">从表中加载列</button>
+      </ng-template>
+      <nz-alert
+        nzType="info"
+        nzMessage="点击右上方链接，可以通过加载指定表的列快速导入列，或者直接添加一个空白列到已选列中。此后在左侧已选列中点击修改配置信息"
+      ></nz-alert>
+      <sv-container col="5">
+        <sv *ngFor="let option of options" label="{{ option['COLUMN_NAME'] }}">
+          {{ option['title'] || option['COLUMN_COMMENT'] }}
+          <a (click)="addColumn(option)">使用</a>
+        </sv>
+      </sv-container>
+    </nz-card>
+    <nz-affix [nzOffsetBottom]="-180" nzTarget=".ant-drawer-body">
+      <nz-card nzTitle="表格列预览" [nzExtra]="extraPreView">
+        <ng-template #extraPreView>
+          <button nz-button nzType="primary" (click)="saveColumn()">保存列配置</button>
+        </ng-template>
+        <st [columns]="columns"></st>
+      </nz-card>
+    </nz-affix>
+  </div>
+</div>

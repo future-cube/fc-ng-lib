@@ -10,13 +10,13 @@
   Out-of-box UI solution for enterprise applications, Let developers focus on business.
 
   [![GitHub Release Date](https://img.shields.io/github/release-date/ng-alain/ng-alain.svg?style=flat-square)](https://github.com/future-cube/fc-ng-lib/releases)
-  [![NPM version](https://img.shields.io/npm/v/ng-alain.svg?style=flat-square)](https://www.npmjs.com/package/@future-cube/theme)
+  [![NPM version](https://img.shields.io/npm/v/ng-alain.svg?style=flat-square)](https://www.npmjs.com/package/@future-cube/ng-lib)
 
 </div>
 
 ## Quickstart
 
-在其他项目中，使用 `npm install @future-cube/theme --save` 安装类库
+在其他项目中，使用 `npm install @future-cube/ng-lib --save` 安装类库
 
 ## Demo
 
@@ -29,10 +29,10 @@
 >
 
 ## 使用方式
-### 全局配置
+### 全局配置 (有修改)
 `shared-fc.module.ts`
 ``` typescript
-import { FcMenuManageModule, FcThemeModule, FcSfWidgetModule } from '@future-cube/theme';
+import { FcMenuManageModule, FcThemeModule, FcSfWidgetModule } from '@future-cube/ng-lib';
 export const SHARED_FC_MODULES = [FcMenuManageModule, FcThemeModule, FcSfWidgetModule];
 ```
 `shared.module.ts`
@@ -51,7 +51,7 @@ import { SHARED_FC_MODULES } from './shared-fc.module';
 ``` typescript
 /* eslint-disable import/order */
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { FcConfig, FC_CONFIG, SfQuillConfig } from '@future-cube/theme';
+import { FcConfig, FC_CONFIG, SfQuillConfig } from '@future-cube/ng-lib/sf-widget';
 import { throwIfAlreadyLoaded } from '@core';
 
 const fcConfig: FcConfig = {

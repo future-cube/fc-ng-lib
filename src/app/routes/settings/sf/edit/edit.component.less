@@ -1,0 +1,144 @@
+:host {
+  ::ng-deep {
+    // 修复多选框不能点满一行的问题
+    .ant-checkbox-group {
+      display: block;
+    }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .page-header__desc {
+      margin-bottom: 0;
+    }
+
+    .box {
+      .columns-optional {
+        /* stylelint-disable-next-line selector-class-pattern */
+        .sv__item {
+          a {
+            display: none;
+          }
+
+          &:hover a {
+            display: inline-block;
+          }
+
+          /* stylelint-disable-next-line selector-class-pattern */
+          .sv__detail span {
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+      }
+
+      .columns-optional,
+      .columns-selected {
+        width: 260px;
+        margin-right: 24px;
+      }
+
+      .columns-config {
+        display: none;
+        flex: 1;
+        margin-right: 24px;
+      }
+
+      .columns-preview {
+        flex: 1;
+
+        .ant-card {
+          min-width: 480px;
+        }
+      }
+
+      &.show-config {
+        .columns-config {
+          display: flex;
+        }
+
+        .columns-preview {
+          flex: inherit;
+          width: 200px;
+          overflow: hidden;
+        }
+      }
+    }
+
+    .example-list {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      min-height: 60px;
+      margin: -8px 0;
+      background: white;
+    }
+
+    .example-box {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin: 8px 0;
+      padding: 20px 10px;
+      color: #666;
+      font-size: 14px;
+      background: white;
+      border: solid 1px #ccc;
+      border-radius: 4px;
+      cursor: move;
+
+      svg {
+        display: inline-block;
+        margin-right: 8px;
+        color: #ccc;
+      }
+
+      .title {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .btn {
+        display: none;
+        margin-left: auto;
+
+        a {
+          display: none;
+          margin-left: 8px;
+        }
+      }
+
+      &:hover {
+        .btn {
+          display: flex;
+
+          a {
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+    .cdk-drag-preview {
+      background-color: blue;
+      // box-sizing: border-box;
+      // border-radius: 4px;
+      // box-shadow: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%);
+      opacity: 0.5;
+      &:extend(.example-box);
+    }
+
+    .cdk-drag-placeholder {
+      background-color: red;
+      opacity: 0.5;
+      &:extend(.example-box);
+    }
+
+    .cdk-drag-animating {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+}

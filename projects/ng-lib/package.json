@@ -1,0 +1,25 @@
+{
+  "name": "@future-cube/ng-lib",
+  "version": "1.2.3",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/future-cube/ng-lib.git"
+  },
+  "bugs": {
+    "url": "https://github.com/future-cube/ng-lib/issues"
+  },
+  "homepage": "https://louku.com",
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0",
+    "@delon/form": "^14.2.0",
+    "@types/quill": "^1.3.0",
+    "ngx-quill": "^19.1.0",
+    "quill": "^1.3.0"
+  },
+  "dependencies": {
+    "quilljs-markdown": "^1.2.0",
+    "tslib": "^2.3.0",
+    "vditor": "^3.8.18"
+  }
+}

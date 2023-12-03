@@ -2,7 +2,8 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SFComponent, SFRadioWidgetSchema, SFSchema, SFUISchema } from '@delon/form';
 import { _HttpClient } from '@delon/theme';
-import { AppHelperService, SfQuillConfig } from '@future-cube/theme';
+import { AppHelperService } from '@future-cube/ng-lib/services';
+import { SfQuillConfig } from '@future-cube/ng-lib/sf-widget';
 
 @Component({
   selector: 'app-doc-edit',
